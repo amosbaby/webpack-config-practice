@@ -1,6 +1,8 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 
 
 console.log('process.env.NODE_ENV:',process.env.NODE_ENV)
@@ -21,7 +23,12 @@ const config = {
   module:{
     rules:[{
       test:/\.(sc|sa|c)ss$/, // 匹配所有的sass/scss/css文件,
-      use: ['style-loader','css-loader','postcss-loader','sass-loader'] // 对应的css-loader名称
+      use: [ 
+        // 'style-loader', // 通过动态添加style标签嵌入
+        MiniCssExtractPlugin.loader, // 通过文件引入嵌入
+        'css-loader',
+        'postcss-loader',
+        'sass-loader'] // 对应的css-loader名称
     }
   ]
   },
@@ -29,7 +36,10 @@ const config = {
     new HtmlWebpackPlugin({
     template:'./src/index.html'
     }),
-   new CleanWebpackPlugin()
+   new CleanWebpackPlugin(),
+   new MiniCssExtractPlugin({
+     filename:'[name]:[contenthash:8].css'
+   })
 ]
 }
 
