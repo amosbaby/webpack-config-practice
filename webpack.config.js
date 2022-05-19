@@ -16,12 +16,12 @@ const config = {
     contentBase:path.resolve(__dirname,'public') ,//静态文件目录
     compress:true, // 是否启动gzip压缩
     port:8000, // 端口号,
-    open :true // 是否打开浏览器
+    open :false // 是否打开浏览器
   },
   module:{
     rules:[{
       test:/\.css$/, // 匹配所有的css文件,
-      use: ['style-loader','css-loader'] // 对应的css-loader名称
+      use: ['style-loader','css-loader','postcss-loader'] // 对应的css-loader名称
     }]
   },
   plugins:[
