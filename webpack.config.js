@@ -21,7 +21,7 @@ const config = {
   module:{
     rules:[{
       test:/\.css$/, // 匹配所有的css文件,
-      use: 'css-loader' // 对应的css-loader名称
+      use: ['style-loader','css-loader'] // 对应的css-loader名称
     }]
   },
   plugins:[
