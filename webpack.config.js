@@ -20,9 +20,10 @@ const config = {
   },
   module:{
     rules:[{
-      test:/\.css$/, // 匹配所有的css文件,
-      use: ['style-loader','css-loader','postcss-loader'] // 对应的css-loader名称
-    }]
+      test:/\.(sc|sa|c)ss$/, // 匹配所有的sass/scss/css文件,
+      use: ['style-loader','css-loader','postcss-loader','sass-loader'] // 对应的css-loader名称
+    }
+  ]
   },
   plugins:[
     new HtmlWebpackPlugin({
