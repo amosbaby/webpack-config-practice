@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 module.exports = {
   mode:'development', // 运行模式，可被命令行覆盖
@@ -14,7 +15,10 @@ module.exports = {
       use: 'css-loader' // 对应的css-loader名称
     }]
   },
-  plugins:[new HtmlWebpackPlugin({
+  plugins:[
+    new HtmlWebpackPlugin({
     template:'./src/index.html'
-  })]
+    }),
+   new CleanWebpackPlugin()
+]
 }
