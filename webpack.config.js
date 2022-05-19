@@ -2,7 +2,10 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
-module.exports = {
+
+console.log('process.env.NODE_ENV:',process.env.NODE_ENV)
+
+const config = {
   mode:'development', // 运行模式，可被命令行覆盖
   entry:'./src/index.js', // 入口文件
   output:{
@@ -21,4 +24,10 @@ module.exports = {
     }),
    new CleanWebpackPlugin()
 ]
+}
+
+
+module.exports = (_,argv)=>{
+  console.log('打包模式:',argv.mode)
+  return  config
 }
