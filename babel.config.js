@@ -16,5 +16,9 @@ module.exports = {
       }
     ]
   ],
+  plugins:[
+    ["@babel/plugin-proposal-decorators", { legacy: true }],
+    ["@babel/plugin-proposal-class-properties", { loose: true }],
+  ],
   sourceType:"unambiguous" // 解决ES6和CommonJS模块导出的问题: https://babeljs.io/docs/en/options#sourcetype
 }

@@ -12,7 +12,8 @@ console.log(msg)
 const img = new Image()
 img.src = logo
 document.getElementById('img-box').appendChild(img)
-
+// 新增装饰器
+@log('hi')
 class Person{
 
   pick = (thing)=>{
@@ -20,7 +21,14 @@ class Person{
   }
 }
 
+function log(msg){
+  return function(target){
+    target.prototype.logger = ()=> `${msg},${target.name}`
+  }
+}
+
 const p = new Person()
 p.pick('shit')
+p.logger()
 
 module.exports = msg
