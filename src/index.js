@@ -13,4 +13,14 @@ const img = new Image()
 img.src = logo
 document.getElementById('img-box').appendChild(img)
 
+class Person{
+
+  pick = (thing)=>{
+    console.log('pick ', thing)
+  }
+}
+
+const p = new Person()
+p.pick('shit')
+
 module.exports = msg

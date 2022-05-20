@@ -21,16 +21,31 @@ const config = {
     open :false // 是否打开浏览器
   },
   module:{
-    rules:[{
+    rules:[
+      {
+        test:/\.js$/,
+        use:[
+          {
+            loader: 'babel-loader',
+            options:{
+              presets:[
+                '@babel/preset-env'
+              ]
+            }
+          }
+        ]
+      },
+      {
       test:/\.(sc|sa|c)ss$/, // 匹配所有的sass/scss/css文件,
       use: [ 
         // 'style-loader', // 通过动态添加style标签嵌入
-        {
-          loader:MiniCssExtractPlugin.loader,
-          options:{
-            publicPath:'//localhost:8000/'
-          }
-        }, // 通过文件引入嵌入
+        MiniCssExtractPlugin.loader,
+        // {
+        //   loader:MiniCssExtractPlugin.loader,
+        //   options:{
+        
+        //   }
+        // }, // 通过文件引入嵌入
         'css-loader',
         //  {
         //   loader:'css-loader',
@@ -52,7 +67,7 @@ const config = {
       parser:{
         dataUrlCondition:{
           // 文件小于 50k 会转换为 base64，大于则拷贝文件
-          maxSize: 50 * 1024
+          maxSize: 10 * 1024
         }
       }
       // use:[
@@ -83,7 +98,7 @@ const config = {
       parser:{
         dataUrlCondition:{
           // 文件小于 10k 会转换为 base64，大于则拷贝文件
-          maxSize: 10 * 1024
+          maxSize: 1110 * 1024
         }
       }
       // use:[
