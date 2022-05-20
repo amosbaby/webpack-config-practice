@@ -62,7 +62,20 @@ const config = {
           }
         }
       ]
-    },
+    },{
+      test:/\.(woff2?|eot|ttf|otf)$/i,
+      use:[
+        {
+          loader:'url-loader',
+          options:{
+            // 体积大于 10KB 打包到 fonts 目录下
+            name:'fonts/[name]_[contenthash:8].[ext]',
+            limit:10*1024
+          }
+        }
+      ]
+
+    }
     
   ]
   },

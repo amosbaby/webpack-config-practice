@@ -1,0 +1,95 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3415770 */
+  src: url('iconfont.woff2?t=1653015477509') format('woff2'),
+       url('iconfont.woff?t=1653015477509') format('woff'),
+       url('iconfont.ttf?t=1653015477509') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tianmao26geyingwenziti:before {
+  content: "\e600";
+}
+
+.icon-ziti:before {
+  content: "\e7b1";
+}
+
+.icon-dianping:before {
+  content: "\fda3";
+}
+
+.icon-guanbi:before {
+  content: "\fda4";
+}
+
+.icon-lianjie:before {
+  content: "\fda5";
+}
+
+.icon-WIFI:before {
+  content: "\fda6";
+}
+
+.icon-jiazhao:before {
+  content: "\fda7";
+}
+
+.icon-quanyi:before {
+  content: "\fda8";
+}
+
+.icon-bangzhu:before {
+  content: "\fda9";
+}
+
+.icon-gequ:before {
+  content: "\fdaa";
+}
+
+.icon-muying:before {
+  content: "\fdab";
+}
+
+.icon-jiaohuan:before {
+  content: "\fdb7";
+}
+
+.icon-baogao:before {
+  content: "\fdb8";
+}
+
+.icon-hangkong:before {
+  content: "\fdb9";
+}
+
+.icon-chongdianzhuang:before {
+  content: "\fdba";
+}
+
+.icon-jiayou:before {
+  content: "\fdbb";
+}
+
+.icon-chuzuche:before {
+  content: "\fdbc";
+}
+
+.icon-gupiao:before {
+  content: "\fdbd";
+}
+
+.icon-zichan:before {
+  content: "\fdbf";
+}
+
+.icon-jiaoyi:before {
+  content: "\fdc0";
+}
+
