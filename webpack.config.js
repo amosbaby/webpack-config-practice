@@ -2,7 +2,9 @@ const path = require('path')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 
+const smp = new SpeedMeasurePlugin()
 
 
 console.log('process.env.NODE_ENV:',process.env.NODE_ENV)
@@ -122,14 +124,16 @@ const config = {
     template:'./src/index.html'
     }),
    new CleanWebpackPlugin(),
-   new MiniCssExtractPlugin({
-     filename:'[name]_[contenthash:8].css'
-   })
 ]
 }
 
 
 module.exports = (_,argv)=>{
   console.log('打包模式:',argv.mode)
-  return  config
+  const tempConfig =  smp.wrap(config)
+  tempConfig .plugins.push(  new MiniCssExtractPlugin({
+    filename:'[name]_[contenthash:8].css'
+  })) 
+
+  return tempConfig
 }
