@@ -9,6 +9,11 @@ const smp = new SpeedMeasurePlugin()
 
 console.log('process.env.NODE_ENV:',process.env.NODE_ENV)
 
+// 路径处理方法
+function resolve(dir){
+  return path.join(__dirname,dir)
+}
+
 const config = {
   mode:'development', // 运行模式，可被命令行覆盖
   entry:'./src/index.js', // 入口文件
@@ -22,6 +27,14 @@ const config = {
     compress:true, // 是否启动gzip压缩
     port:8000, // 端口号,
     open :false // 是否打开浏览器
+  },
+  resolve:{
+    // 配置别名
+    alias:{
+      '~':resolve('src'),
+      '@':resolve('src'),
+      '@fonts':resolve('src/fonts')
+    }
   },
   module:{
     rules:[

@@ -1,7 +1,7 @@
-import './main.css'
-import './sass.scss'
+import '~/main.css'
+import '~/sass.scss'
 // 引入字体文件
-import './fonts/iconfont.css'
+import '@fonts/iconfont.css'
 
 import logo from '../public/logo.png'
 
