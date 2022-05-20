@@ -34,7 +34,9 @@ const config = {
       '~':resolve('src'),
       '@':resolve('src'),
       '@fonts':resolve('src/fonts')
-    }
+    },
+    // 引入模块时可以忽略一下扩展名 https://webpack.js.org/configuration/resolve/
+    extensions:['.js','.json','.wasm']
   },
   module:{
     rules:[
