@@ -25,11 +25,45 @@ const config = {
       test:/\.(sc|sa|c)ss$/, // 匹配所有的sass/scss/css文件,
       use: [ 
         // 'style-loader', // 通过动态添加style标签嵌入
-        MiniCssExtractPlugin.loader, // 通过文件引入嵌入
+        {
+          loader:MiniCssExtractPlugin.loader,
+          options:{
+            publicPath:'//localhost:8000/'
+          }
+        }, // 通过文件引入嵌入
         'css-loader',
+        //  {
+        //   loader:'css-loader',
+        //   options:{
+        //     importLoaders:2,
+        //     url:false
+        //   }
+        // },
+        
         'postcss-loader',
         'sass-loader'] // 对应的css-loader名称
-    }
+    },{
+      test:/\.(jpe?g|png|gif)$/i,
+      use:[
+        
+        // {
+        //   loader:'file-loader',
+        //   options:{
+        //     name:'[name]_[contenthash:8].[ext]'
+        //   }
+        // },
+        // 小于limit的就会转成base64，否则回退到file-loader,两者配其一即可
+        {
+          loader:'url-loader',
+          options:{
+            name:'[name]_[contenthash:8].[ext]',
+            // 文件小于 50k 会转换为 base64，大于则拷贝文件
+            limit:50*1024
+          }
+        }
+      ]
+    },
+    
   ]
   },
   plugins:[
@@ -38,7 +72,7 @@ const config = {
     }),
    new CleanWebpackPlugin(),
    new MiniCssExtractPlugin({
-     filename:'[name]:[contenthash:8].css'
+     filename:'[name]_[contenthash:8].css'
    })
 ]
 }
