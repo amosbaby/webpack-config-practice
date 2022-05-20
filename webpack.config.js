@@ -10,6 +10,7 @@ console.log('process.env.NODE_ENV:',process.env.NODE_ENV)
 const config = {
   mode:'development', // 运行模式，可被命令行覆盖
   entry:'./src/index.js', // 入口文件
+  devtool:'eval-source-map',
   output:{
     filename:'bundle.js', // 输出文件名
     path:path.join(__dirname,'dist') // 输出目录
