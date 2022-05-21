@@ -31,4 +31,8 @@ const p = new Person()
 p.pick('shit')
 p.logger()
 
+function unusedFn(){
+  console.log('啊哈，无用代码')
+}
+
 module.exports = msg
