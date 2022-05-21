@@ -3,6 +3,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const webpack = require('webpack')
 
 const smp = new SpeedMeasurePlugin()
 
@@ -36,13 +37,26 @@ const config = {
       '@fonts':resolve('src/fonts')
     },
     // 引入模块时可以忽略一下扩展名 https://webpack.js.org/configuration/resolve/
-    extensions:['.js','.json','.wasm']
+    extensions:['.js','.json','.wasm'],
+    // 告诉webpack解析模块时需要搜索的目录
+    // 告诉webpack优先搜索src，可以大幅节省查找时间
+    modules:[resolve('src'),'node_modules'] 
   },
   module:{
+    noParse:/jquery|lodash/, // 不需要解析依赖的第三方大型类库，可通过该配置，提高构建速度
     rules:[
       {
         test:/\.js$/,
+        include:resolve('src'),
+        exclude:/node_modules/,
         use:[
+          // {
+          //   loader: 'thread-loader', // 配置在其后的loader都处于一个单独的worker pool中, 对于小型项目不太实用，有额外的worker pool开销，反而会耗时更多
+          //   options:{
+          //     worker:3
+          //   }
+          // }
+          
           {
             loader: 'babel-loader',
             options:{
@@ -55,6 +69,8 @@ const config = {
       },
       {
       test:/\.(sc|sa|c)ss$/, // 匹配所有的sass/scss/css文件,
+      include:resolve('src'),
+      exclude:/node_modules/,
       use: [ 
         // 'style-loader', // 通过动态添加style标签嵌入
         MiniCssExtractPlugin.loader,
@@ -139,6 +155,10 @@ const config = {
     template:'./src/index.html'
     }),
    new CleanWebpackPlugin(),
+   new webpack.IgnorePlugin({
+     resourceRegExp:/^\.\/locale$/, // 排除掉moment包中的非中文语音，大大节省打包体积
+     contextRegExp:/moment$/
+   })
 ]
 }
 
