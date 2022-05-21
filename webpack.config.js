@@ -62,7 +62,8 @@ const config = {
             options:{
               presets:[
                 '@babel/preset-env'
-              ]
+              ],
+              cacheDirectory:true // 启用缓存
             }
           }
         ]
@@ -80,6 +81,7 @@ const config = {
         
         //   }
         // }, // 通过文件引入嵌入
+        'cache-loader', // 获取前面 loader 转换的结果
         'css-loader',
         //  {
         //   loader:'css-loader',
