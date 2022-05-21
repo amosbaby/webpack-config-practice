@@ -3,7 +3,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
-const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const webpack = require('webpack')
 
 const smp = new SpeedMeasurePlugin()
@@ -163,8 +163,8 @@ const config = {
      contextRegExp:/moment$/
    }),
    new BundleAnalyzerPlugin({
-     // analyzerMode:'disabled', // 不启动展示打包报告的http服务器
-     generateStatsFile:true // 是否生成stats.json文件
+      analyzerMode:'disabled', // 不启动展示打包报告的http服务器
+    //  generateStatsFile:true // 是否生成stats.json文件
    })
 ]
 }
