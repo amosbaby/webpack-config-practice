@@ -28,7 +28,7 @@ const config = {
   entry:'./src/index.js', // 入口文件
   devtool: isProdMode ? 'eval' :  'eval-source-map',
   output:{
-    filename:'bundle.js', // 输出文件名
+    filename:'[name]_[contenthash:8].js', // 输出文件名
     path:path.join(__dirname,'dist') // 输出目录
   },
   devServer:{
@@ -184,7 +184,37 @@ const config = {
       new OptimizeCssAssetsWebpackPlugin({}),
       // 压缩js，webpack5默认开启，但配置optimization后需要手动配置
       new TerserWebpackPlugin()
-    ]
+    ],
+    splitChunks:{
+      cacheGroups:{ // 配置提取模块方案
+        default: false,
+        styles: {
+            name: 'styles',
+            test: /\.(s?css|less|sass)$/,
+            chunks: 'all',
+            enforce: true,
+            priority: 10,
+          },
+          common: {
+            name: 'chunk-common',
+            chunks: 'all',
+            minChunks: 2,
+            maxInitialRequests: 5,
+            minSize: 0,
+            priority: 1,
+            enforce: true,
+            reuseExistingChunk: true,
+          },
+          vendors: {
+            name: 'chunk-vendors',
+            test: /[\\/]node_modules[\\/]/,
+            chunks: 'all',
+            priority: 2,
+            enforce: true,
+            reuseExistingChunk: true,
+          },
+      }
+    }
   }
 }
 
