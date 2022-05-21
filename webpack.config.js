@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const webpack = require('webpack')
 
 const smp = new SpeedMeasurePlugin()
@@ -166,7 +167,14 @@ const config = {
       analyzerMode:'disabled', // 不启动展示打包报告的http服务器
     //  generateStatsFile:true // 是否生成stats.json文件
    })
-]
+],
+  optimization:{
+    minimize: true,
+    minimizer:[
+      // 压缩css
+      new OptimizeCssAssetsWebpackPlugin({})
+    ]
+  }
 }
 
 
