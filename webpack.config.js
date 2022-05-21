@@ -6,7 +6,10 @@ const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserWebpackPlugin = require('terser-webpack-plugin')
+const PurgecssWebpackPlugin = require('purgecss-webpack-plugin')
+
 const webpack = require('webpack')
+const glob = require('glob')
 
 const smp = new SpeedMeasurePlugin()
 
@@ -169,6 +172,9 @@ const config = {
    new BundleAnalyzerPlugin({
       analyzerMode:'disabled', // 不启动展示打包报告的http服务器
      generateStatsFile:false // 是否生成stats.json文件
+   }),
+   new PurgecssWebpackPlugin({ 
+     paths:glob.sync(`${resolve('src')}/**/*`,{nodir:true})
    })
 ],
   optimization:{

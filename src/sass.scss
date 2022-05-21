@@ -9,4 +9,10 @@ body {
     background: url('../public/ztp.jpeg');
     background-size: contain;
   }
+  .used{
+    color: red;
+  }
+  .unused{
+    font-size: large;
+  }
 }
