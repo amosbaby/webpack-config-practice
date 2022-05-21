@@ -5,10 +5,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
 const webpack = require('webpack')
 
 const smp = new SpeedMeasurePlugin()
 
+
+const isProdMode = process.env.NODE_ENV === 'prod' 
 
 console.log('process.env.NODE_ENV:',process.env.NODE_ENV)
 
@@ -20,7 +23,7 @@ function resolve(dir){
 const config = {
   mode:'development', // 运行模式，可被命令行覆盖
   entry:'./src/index.js', // 入口文件
-  devtool:'eval-source-map',
+  devtool: isProdMode ? 'eval' :  'eval-source-map',
   output:{
     filename:'bundle.js', // 输出文件名
     path:path.join(__dirname,'dist') // 输出目录
@@ -165,14 +168,16 @@ const config = {
    }),
    new BundleAnalyzerPlugin({
       analyzerMode:'disabled', // 不启动展示打包报告的http服务器
-    //  generateStatsFile:true // 是否生成stats.json文件
+     generateStatsFile:false // 是否生成stats.json文件
    })
 ],
   optimization:{
     minimize: true,
     minimizer:[
       // 压缩css
-      new OptimizeCssAssetsWebpackPlugin({})
+      new OptimizeCssAssetsWebpackPlugin({}),
+      // 压缩js，webpack5默认开启，但配置optimization后需要手动配置
+      new TerserWebpackPlugin()
     ]
   }
 }
