@@ -32,7 +32,7 @@ p.pick('shit')
 p.logger()
 
 function unusedFn(){
-  console.log('啊哈，无用代码')
+  console.log('啊哈，无用代码11')
 }
 
 module.exports = msg

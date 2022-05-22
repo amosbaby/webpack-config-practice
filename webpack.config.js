@@ -31,6 +31,9 @@ const config = {
     filename:'[name]_[contenthash:8].js', // 输出文件名
     path:path.join(__dirname,'dist') // 输出目录
   },
+  cache:{
+    type:'filesystem' // 使用缓存大大优化二次打包
+  },
   devServer:{
     contentBase:path.resolve(__dirname,'public') ,//静态文件目录
     compress:true, // 是否启动gzip压缩
